@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MFE Test</title>
+    <style>
+    :root {
+        font: -apple-system-body;
+        
+        --background-color: #f5f5f6;
+        --on-background-color: #000000;
+        --surface-color: #ffffff;
+        --on-surface-color: #000000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --background-color: #000000;
+            --on-background-color: #ffffff;
+            --surface-color: #1c1c1d;
+            --on-surface-color: #ffffff;
+        }
+    }
+
+    body {
+        background-color: var(--background-color);
+        color: var(--on-background-color);
+        padding: 20px;
+        font-size: 1rem;
+    }
+
+    button {
+        background-color: var(--surface-color);
+        color: var(--on-surface-color);
+        border: none;
+        padding: 10px 20px;
+        margin: 20px;
+        cursor: pointer;
+        font-size: 1rem;
+        border-radius: 4px;
+    }
+    </style>
+</head>
+<body>
+
+<div id="nativeContent"></div>
+
+<br>
+
+<div id="clientInfo"></div>
+
+<br>
+
+<button id="closeWindowButton">Close window</button>
+
+<br>
+
+<button id="alertButton">Show alert</button>
+
+<br>
+
+<button id="navigateButton">Navigate with custom domain</button>
+
+<br>
+
+<button id="postMessageButton">Post message</button>
+
+<script>
+    function postMessageToApp(message) {
+        var nativeApp;
+        if (window.webkit && window.webkit.messageHandlers) {
+            nativeApp = window.webkit.messageHandlers.iOS;
+        } else {
+            nativeApp = window.Android;
+        }
+
+        if (nativeApp) {
+            return nativeApp.postMessage(message);
+        } else {
+          return null;
+        }
+    }
+
+    document.getElementById("clientInfo").innerHTML = "Preferred language: " + window.navigator.language + "<br>Font size: " + getComputedStyle(document.documentElement).fontSize + "<br>Theme: " + ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? "Dark" : "Light");
+
+    document.getElementById("closeWindowButton").addEventListener("click", function() {
+        window.close();
+    });
+
+    document.getElementById("alertButton").addEventListener("click", function() {
+        alert("Alert triggered by javascript");
+    });
+
+    document.getElementById("navigateButton").addEventListener("click", function() {
+        window.location.href = "letmetellyousomething://actions/dismiss?logout=true&invalidate=true";
+    });
+
+    document.getElementById("postMessageButton").addEventListener("click", function() {
+        var response = postMessageToApp("Message from web view");
+        if (response) {
+            document.getElementById("nativeContent").innerHTML = response;
+        }
+    });
+</script>
+
+</body>
+</html>
