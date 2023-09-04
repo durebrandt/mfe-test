@@ -80,7 +80,7 @@
         }
     }
 
-    document.getElementById("clientInfo").innerHTML = "Preferred language: " + window.navigator.language + "<br>Font size: " + getComputedStyle(document.documentElement).fontSize + "<br>Theme: " + ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? "Dark" : "Light");
+    document.getElementById("clientInfo").innerHTML = "Preferred language: " + window.navigator.language + "<br>Preferred languages: " + window.navigator.languages + "<br>Font size: " + getComputedStyle(document.documentElement).fontSize + "<br>Theme: " + ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? "Dark" : "Light");
 
     document.getElementById("closeWindowButton").addEventListener("click", function() {
         window.close();
