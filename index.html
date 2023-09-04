@@ -80,7 +80,15 @@
         }
     }
 
-    document.getElementById("clientInfo").innerHTML = "Preferred language: " + window.navigator.language + "<br>Preferred languages: " + window.navigator.languages + "<br>Font size: " + getComputedStyle(document.documentElement).fontSize + "<br>Theme: " + ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? "Dark" : "Light");
+    function onSuccess(message) {
+        document.getElementById("nativeContent").innerHTML = message;
+    }
+
+    function onError(error) {
+        document.getElementById("nativeContent").innerHTML = error;
+    }
+
+    document.getElementById("clientInfo").innerHTML = "Preferred language: " + window.navigator.language + "<br>Preferred languages: " + window.navigator.languages;
 
     document.getElementById("closeWindowButton").addEventListener("click", function() {
         window.close();
@@ -97,7 +105,7 @@
     document.getElementById("postMessageButton").addEventListener("click", function() {
         var response = postMessageToApp("Message from web view");
         if (response) {
-            document.getElementById("nativeContent").innerHTML = response;
+            
         }
     });
 </script>
