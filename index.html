@@ -79,9 +79,16 @@
         window.location.href = "letmetellyousomething://actions/dismiss?logout=true&invalidate=true";
     });
 
+    function onSuccess(result) {
+        document.getElementById("nativeContent").innerHTML = result;
+    }
+
+    function onError(error) {
+        document.getElementById("nativeContent").innerHTML = error;
+    }
+
     document.getElementById("postMessageButton").addEventListener("click", function() {
-        var response = MobileApp.postMessage("Message from web view");
-        document.getElementById("nativeContent").innerHTML = response;
+        MobileApp.postMessage("Message from web view", onSuccess, onError);
     });
 </script>
 
