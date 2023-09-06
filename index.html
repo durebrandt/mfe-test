@@ -80,11 +80,11 @@
     });
 
     function onSuccess(result) {
-        document.getElementById("nativeContent").innerHTML = result;
+        document.getElementById("nativeContent").innerHTML = "Data from app " + result;
     }
 
     function onError(error) {
-        document.getElementById("nativeContent").innerHTML = error;
+        document.getElementById("nativeContent").innerHTML = "Error from app " + error;
     }
 
     document.getElementById("postMessageButton").addEventListener("click", function() {
