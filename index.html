@@ -88,7 +88,7 @@
     }
 
     document.getElementById("postMessageButton").addEventListener("click", function() {
-        $$native.postMessage("Message from web view", onSuccess, onError);
+        MobileApp.postMessage("Message from web view", onSuccess, onError);
     });
 </script>
 
