@@ -80,7 +80,7 @@
     });
 
     function onSuccess(result) {
-        document.getElementById("nativeContent").innerHTML = "Data from app " + result;
+        document.getElementById("nativeContent").innerHTML = "Data from app " + JSON.stringify(result);
     }
 
     function onError(error) {
